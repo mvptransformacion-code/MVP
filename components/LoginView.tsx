@@ -53,9 +53,7 @@ export function LoginView({ onLogin, onViewPublicCartelera }: LoginViewProps) {
       {/* Franja superior estética */}
       <div className="w-full bg-white/10 backdrop-blur-md border-b border-white/10 py-2 px-6 flex items-center justify-between text-white/80 text-xs">
         <div className="flex items-center gap-2">
-          <span className="font-bold text-white tracking-wide">UniCABA</span>
-          <span>·</span>
-          <span>Universidad de la Ciudad de Buenos Aires</span>
+          <span className="font-bold text-white tracking-wide">Universidad de la Ciudad de Buenos Aires</span>
           <span className="hidden sm:inline">· Sede Perón 830</span>
         </div>
         <div className="flex items-center gap-1.5 text-white/70">
@@ -208,7 +206,7 @@ export function LoginView({ onLogin, onViewPublicCartelera }: LoginViewProps) {
                 <ShieldCheck className="w-3.5 h-3.5 text-brand-blue" />
                 Acceso con cuenta institucional
               </span>
-              <span className="font-semibold text-brand-navy">UniCABA 2026</span>
+              <span className="font-semibold text-brand-navy">Sede Perón 830</span>
             </div>
           </div>
         </div>

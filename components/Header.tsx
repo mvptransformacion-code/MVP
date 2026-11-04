@@ -49,7 +49,6 @@ export function Header({
       {/* Top Banner en Azul Marino y Cyan de la portada */}
       <div className="bg-gradient-to-r from-brand-navy via-[#004e82] to-[#0077c8] text-white px-4 py-1.5 text-xs font-medium flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="bg-white/20 px-2 py-0.5 rounded text-[11px] font-bold tracking-wide">UniCABA</span>
           <span className="font-semibold">Universidad de la Ciudad de Buenos Aires</span>
           <span className="text-white/60">·</span>
           <span className="text-white/90">Sede Perón 830</span>
