@@ -287,3 +287,4 @@ export function generateHeatmapMatrix(
 
   return cells;
 }
+

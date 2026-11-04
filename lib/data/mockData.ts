@@ -325,3 +325,4 @@ export const INITIAL_COMMISSIONS: Commission[] = [
     weeklyModality: ['presencial', 'presencial', 'presencial', 'presencial', 'virtual', 'virtual', 'presencial', 'presencial', 'virtual', 'presencial', 'presencial', 'presencial', 'presencial', 'presencial', 'virtual', 'presencial'],
   }
 ];
+

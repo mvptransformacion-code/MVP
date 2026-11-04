@@ -287,3 +287,4 @@ export const SPACES: Space[] = [
 
 export const TOTAL_OWN_CAPACITY = SPACES.filter(s => s.department === 'Propios').reduce((acc, s) => acc + s.capacity, 0);
 export const TOTAL_BUILDING_CAPACITY = SPACES.reduce((acc, s) => acc + s.capacity, 0);
+

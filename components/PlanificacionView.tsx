@@ -2,8 +2,7 @@
 
 import React, { useState } from 'react';
 import { Commission, DayOfWeek, Modality } from '@/types';
-import { WEEKS_DATA } from '@/lib/data/mockData';
-import { PlusCircle, FileSpreadsheet, CheckCircle2, RotateCcw, Clock, Users, BookOpen } from 'lucide-react';
+import { PlusCircle, RotateCcw, BookOpen } from 'lucide-react';
 
 interface PlanificacionViewProps {
   commissions: Commission[];
@@ -65,12 +64,12 @@ export function PlanificacionView({ commissions, onAddCommission, onResetCommiss
       <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="bg-purple-100 text-unicaba-purple font-extrabold text-xs uppercase px-2.5 py-0.5 rounded-full border border-purple-200">
-              Planificación Académica (HU2, HU3, HU4)
+            <span className="bg-brand-blue/10 text-brand-blue font-extrabold text-xs uppercase px-2.5 py-0.5 rounded-full border border-brand-blue/20">
+              Planificación Académica
             </span>
             <span className="text-xs text-slate-500">· Formulario con Opciones Cerradas</span>
           </div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight mt-1">
+          <h1 className="text-2xl font-black text-brand-navy tracking-tight mt-1">
             Gestión y Carga de Comisiones
           </h1>
           <p className="text-xs text-slate-500 mt-1">
@@ -81,7 +80,7 @@ export function PlanificacionView({ commissions, onAddCommission, onResetCommiss
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsOpenForm(!isOpenForm)}
-            className="flex items-center gap-2 px-4 py-2 bg-unicaba-purple hover:bg-purple-900 text-white rounded-xl text-xs font-bold transition-all shadow-xs"
+            className="flex items-center gap-2 px-4 py-2 bg-brand-blue hover:bg-[#006cb8] text-white rounded-xl text-xs font-bold transition-all shadow-xs"
           >
             <PlusCircle className="w-4 h-4" />
             <span>{isOpenForm ? 'Cerrar Formulario' : 'Nueva Comisión'}</span>
@@ -100,9 +99,9 @@ export function PlanificacionView({ commissions, onAddCommission, onResetCommiss
 
       {/* Formulario de Carga */}
       {isOpenForm && (
-        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-2xl border-2 border-purple-200 shadow-sm space-y-4">
-          <h2 className="text-sm font-black text-slate-900 flex items-center gap-2 pb-2 border-b border-slate-100">
-            <BookOpen className="w-4 h-4 text-unicaba-pink" />
+        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-2xl border-2 border-brand-blue/30 shadow-sm space-y-4">
+          <h2 className="text-sm font-black text-brand-navy flex items-center gap-2 pb-2 border-b border-slate-100">
+            <BookOpen className="w-4 h-4 text-brand-blue" />
             Cargar Nueva Comisión con Validación de Formato
           </h2>
 
@@ -116,7 +115,7 @@ export function PlanificacionView({ commissions, onAddCommission, onResetCommiss
                 placeholder="Ej: ASIG00240"
                 value={courseCode}
                 onChange={(e) => setCourseCode(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-unicaba-purple"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue"
               />
             </div>
 
@@ -129,7 +128,7 @@ export function PlanificacionView({ commissions, onAddCommission, onResetCommiss
                 placeholder="Ej: Sistemas de Información"
                 value={courseName}
                 onChange={(e) => setCourseName(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-unicaba-purple"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue"
               />
             </div>
 
@@ -139,7 +138,7 @@ export function PlanificacionView({ commissions, onAddCommission, onResetCommiss
               <select
                 value={career}
                 onChange={(e) => setCareer(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-unicaba-purple"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue"
               >
                 <option value="Lic. en Tecnologías Digitales">Lic. en Tecnologías Digitales</option>
                 <option value="Lic. en Gestión Institucional">Lic. en Gestión Institucional</option>
@@ -155,7 +154,7 @@ export function PlanificacionView({ commissions, onAddCommission, onResetCommiss
               <select
                 value={team}
                 onChange={(e) => setTeam(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-unicaba-purple"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue"
               >
                 <option value="Único">Único</option>
                 <option value="Equipo 1">Equipo 1</option>
@@ -173,7 +172,7 @@ export function PlanificacionView({ commissions, onAddCommission, onResetCommiss
                 placeholder="Nombre y Apellido del Docente"
                 value={professorName}
                 onChange={(e) => setProfessorName(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-unicaba-purple"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue"
               />
             </div>
 
@@ -187,7 +186,7 @@ export function PlanificacionView({ commissions, onAddCommission, onResetCommiss
                 required
                 value={enrolledStudents}
                 onChange={(e) => setEnrolledStudents(Number(e.target.value))}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-unicaba-purple font-bold"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue font-bold"
               />
             </div>
 
@@ -197,7 +196,7 @@ export function PlanificacionView({ commissions, onAddCommission, onResetCommiss
               <select
                 value={dayOfWeek}
                 onChange={(e) => setDayOfWeek(e.target.value as DayOfWeek)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-unicaba-purple font-bold"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue font-bold"
               >
                 {days.map(d => <option key={d} value={d}>{d}</option>)}
               </select>
@@ -234,7 +233,7 @@ export function PlanificacionView({ commissions, onAddCommission, onResetCommiss
             </button>
             <button
               type="submit"
-              className="px-5 py-2 bg-unicaba-purple hover:bg-purple-900 text-white rounded-xl text-xs font-bold transition-all shadow-xs"
+              className="px-5 py-2 bg-brand-blue hover:bg-[#006cb8] text-white rounded-xl text-xs font-bold transition-all shadow-xs"
             >
               Guardar Comisión
             </button>
@@ -245,7 +244,7 @@ export function PlanificacionView({ commissions, onAddCommission, onResetCommiss
       {/* Lista de Comisiones Registradas */}
       <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
         <div className="p-4 border-b border-slate-100 flex items-center justify-between">
-          <span className="font-extrabold text-xs text-slate-700">
+          <span className="font-extrabold text-xs text-brand-navy">
             Comisiones Cargadas en la Base ({commissions.length})
           </span>
           <span className="text-[11px] text-slate-400">

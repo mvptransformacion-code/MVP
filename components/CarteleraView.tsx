@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { WeeklyAllocation, DayOfWeek } from '@/types';
 import { SPACES } from '@/lib/data/spaces';
-import { Search, MapPin, Clock, Calendar, Users, Filter, Tv, CheckCircle2, AlertTriangle, Monitor } from 'lucide-react';
+import { Search, MapPin, Clock, Calendar, Users, Tv, CheckCircle2, AlertTriangle, Monitor } from 'lucide-react';
 
 interface CarteleraViewProps {
   allocations: WeeklyAllocation[];
@@ -47,18 +47,18 @@ export function CarteleraView({ allocations, currentWeek, dateRange }: Cartelera
     <div className={`space-y-6 ${isKioskMode ? 'p-6 bg-slate-900 text-white min-h-screen' : ''}`}>
       {/* Banner de la Cartelera */}
       <div className={`p-6 rounded-2xl border shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4 ${
-        isKioskMode ? 'bg-slate-800/80 border-slate-700' : 'bg-gradient-to-r from-pink-50 via-white to-purple-50 border-pink-100'
+        isKioskMode ? 'bg-slate-800/80 border-slate-700' : 'bg-gradient-to-r from-blue-50/70 via-white to-sky-50/40 border-brand-blue/20'
       }`}>
         <div>
           <div className="flex items-center gap-2">
-            <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider ${
-              isKioskMode ? 'bg-pink-500/20 text-pink-300 border border-pink-500/40' : 'bg-pink-100 text-unicaba-pink'
+            <span className={`px-2.5 py-0.5 rounded-full text-xs font-black uppercase tracking-wider ${
+              isKioskMode ? 'bg-brand-blue/30 text-brand-cyan border border-brand-blue/40' : 'bg-brand-blue/10 text-brand-blue'
             }`}>
               Cartelera Digital en Vivo
             </span>
             <span className="text-xs text-slate-400">· Vista Pública (Sin Login Requerido)</span>
           </div>
-          <h1 className={`text-2xl font-black tracking-tight mt-1 ${isKioskMode ? 'text-white' : 'text-slate-900'}`}>
+          <h1 className={`text-2xl font-black tracking-tight mt-1 ${isKioskMode ? 'text-white' : 'text-brand-navy'}`}>
             Distribución Diaria de Aulas · Sede Perón 830
           </h1>
           <p className={`text-xs mt-1 ${isKioskMode ? 'text-slate-300' : 'text-slate-600'}`}>
@@ -71,13 +71,13 @@ export function CarteleraView({ allocations, currentWeek, dateRange }: Cartelera
           onClick={() => setIsKioskMode(!isKioskMode)}
           className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shadow-xs ${
             isKioskMode
-              ? 'bg-pink-600 hover:bg-pink-700 text-white'
+              ? 'bg-brand-blue hover:bg-[#006cb8] text-white'
               : 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-200'
           }`}
           title="Alternar vista ampliada para monitores en pasillos de la sede"
         >
-          <Tv className="w-4 h-4 text-unicaba-pink" />
-          <span>{isKioskMode ? 'Salir de Modo Tótem' : 'Modo Pantalla Sede'}</span>
+          <Tv className="w-4 h-4 text-brand-blue" />
+          <span>{isKioskMode ? 'Salir de Modo Pantalla' : 'Modo Pantalla Sede'}</span>
         </button>
       </div>
 
@@ -95,8 +95,8 @@ export function CarteleraView({ allocations, currentWeek, dateRange }: Cartelera
                 className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap shadow-xs ${
                   isSelected
                     ? isKioskMode
-                      ? 'bg-pink-600 text-white ring-2 ring-pink-400'
-                      : 'bg-unicaba-pink text-white ring-2 ring-pink-300 shadow-md'
+                      ? 'bg-brand-blue text-white ring-2 ring-brand-cyan'
+                      : 'bg-brand-blue text-white ring-2 ring-brand-blue/30 shadow-md'
                     : isKioskMode
                       ? 'bg-slate-800 text-slate-300 hover:bg-slate-700'
                       : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
@@ -125,8 +125,8 @@ export function CarteleraView({ allocations, currentWeek, dateRange }: Cartelera
               placeholder="Buscar materia, aula, docente..."
               className={`w-full pl-9 pr-3 py-2 text-xs rounded-xl border focus:outline-none focus:ring-2 ${
                 isKioskMode
-                  ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400 focus:ring-pink-500'
-                  : 'bg-white border-slate-200 text-slate-800 placeholder-slate-400 focus:ring-unicaba-pink'
+                  ? 'bg-slate-800 border-slate-700 text-white placeholder-slate-400 focus:ring-brand-blue'
+                  : 'bg-white border-slate-200 text-slate-800 placeholder-slate-400 focus:ring-brand-blue'
               }`}
             />
           </div>
@@ -137,8 +137,8 @@ export function CarteleraView({ allocations, currentWeek, dateRange }: Cartelera
             onChange={(e) => setSelectedCareer(e.target.value)}
             className={`w-full sm:w-56 px-3 py-2 text-xs rounded-xl border focus:outline-none focus:ring-2 ${
               isKioskMode
-                ? 'bg-slate-800 border-slate-700 text-white focus:ring-pink-500'
-                : 'bg-white border-slate-200 text-slate-800 focus:ring-unicaba-pink'
+                ? 'bg-slate-800 border-slate-700 text-white focus:ring-brand-blue'
+                : 'bg-white border-slate-200 text-slate-800 focus:ring-brand-blue'
             }`}
           >
             <option value="all">Todas las carreras</option>
@@ -170,9 +170,9 @@ export function CarteleraView({ allocations, currentWeek, dateRange }: Cartelera
                 key={alloc.id}
                 className={`p-5 rounded-2xl border transition-all duration-200 shadow-xs hover:shadow-md flex flex-col justify-between ${
                   isKioskMode
-                    ? 'bg-slate-800/90 border-slate-700 hover:border-pink-500'
+                    ? 'bg-slate-800/90 border-slate-700 hover:border-brand-blue'
                     : isPresential
-                      ? 'bg-white border-slate-200 hover:border-unicaba-pink/50'
+                      ? 'bg-white border-slate-200 hover:border-brand-blue/50'
                       : 'bg-slate-50/70 border-dashed border-slate-200'
                 }`}
               >
@@ -196,7 +196,7 @@ export function CarteleraView({ allocations, currentWeek, dateRange }: Cartelera
                   </div>
 
                   {/* Nombre de la Materia */}
-                  <h3 className={`font-bold text-base leading-snug line-clamp-2 ${isKioskMode ? 'text-white' : 'text-slate-900'}`}>
+                  <h3 className={`font-bold text-base leading-snug line-clamp-2 ${isKioskMode ? 'text-white' : 'text-brand-navy'}`}>
                     {alloc.courseName}
                   </h3>
                   <p className={`text-xs mt-1 ${isKioskMode ? 'text-slate-400' : 'text-slate-500'}`}>
@@ -211,20 +211,20 @@ export function CarteleraView({ allocations, currentWeek, dateRange }: Cartelera
                 <div className="mt-4 pt-4 border-t border-slate-100/80">
                   {isPresential ? (
                     primarySpace ? (
-                      <div className="flex items-center justify-between bg-slate-50 p-3 rounded-xl border border-slate-200">
+                      <div className="flex items-center justify-between bg-brand-light p-3 rounded-xl border border-brand-blue/20">
                         <div className="flex items-center gap-2.5">
-                          <div className="w-9 h-9 rounded-lg bg-pink-100 text-unicaba-pink flex items-center justify-center font-black text-sm">
-                            <MapPin className="w-5 h-5 text-unicaba-pink" />
+                          <div className="w-9 h-9 rounded-lg bg-brand-blue/15 text-brand-blue flex items-center justify-center font-black text-sm">
+                            <MapPin className="w-5 h-5 text-brand-blue" />
                           </div>
                           <div>
-                            <div className="font-extrabold text-sm text-slate-900">
+                            <div className="font-extrabold text-sm text-brand-navy">
                               {alloc.assignedSpaceIds.length > 1 
                                 ? `Aulas combinadas: ${assignedSpaces.map(s => s?.name).join(' + ')}`
                                 : primarySpace.name
                               }
                             </div>
-                            <div className="text-[11px] text-slate-500 font-medium">
-                              Piso: <span className="font-bold text-slate-700">{primarySpace.floor}</span> · Capacidad: {primarySpace.capacity} lugares
+                            <div className="text-[11px] text-slate-600 font-medium">
+                              Piso: <span className="font-bold text-brand-navy">{primarySpace.floor}</span> · Capacidad: {primarySpace.capacity} lugares
                             </div>
                           </div>
                         </div>
@@ -242,7 +242,7 @@ export function CarteleraView({ allocations, currentWeek, dateRange }: Cartelera
                     )
                   ) : (
                     <div className="bg-slate-100/70 p-3 rounded-xl text-xs text-slate-600 flex items-center gap-2">
-                      <Monitor className="w-4 h-4 text-blue-500" />
+                      <Monitor className="w-4 h-4 text-brand-blue" />
                       <span>{alloc.statusMessage || 'Sin espacio físico asignado (Campus Virtual)'}</span>
                     </div>
                   )}

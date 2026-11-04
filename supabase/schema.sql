@@ -136,3 +136,4 @@ INSERT INTO public.spaces (id, name, floor, type, capacity, department, equipmen
   ('406', 'Aula 406', '4°', 'Aula', 96, 'Propios', ARRAY['Proyector', 'Sonido', 'Pizarra']),
   ('4SR', 'Sala de Reunión 4SR', '4°', 'Sala de Reunión', 13, 'Propios', ARRAY['Pantalla TV', 'Mesa redonda'])
 ON CONFLICT (id) DO NOTHING;
+

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { WeeklyAllocation, DayOfWeek, Space } from '@/types';
+import { WeeklyAllocation, DayOfWeek, Space, RoomFeatureRequest } from '@/types';
 import { SPACES } from '@/lib/data/spaces';
 import { 
   Building2, 
@@ -15,7 +15,10 @@ import {
   Info, 
   CheckCircle2, 
   Flame,
-  FileCheck2
+  FileCheck2,
+  SlidersHorizontal,
+  Wifi,
+  ThumbsUp
 } from 'lucide-react';
 
 interface BedeliaConsoleViewProps {
@@ -33,6 +36,8 @@ interface BedeliaConsoleViewProps {
   onRunEngine: () => void;
   onToggleSimulation75: () => void;
   simulation75Active: boolean;
+  roomFeatureRequests: RoomFeatureRequest[];
+  onApproveFeatureRequest: (requestId: string, assignedSpaceId: string) => void;
 }
 
 export function BedeliaConsoleView({
@@ -49,7 +54,9 @@ export function BedeliaConsoleView({
   isWeekApproved,
   onRunEngine,
   onToggleSimulation75,
-  simulation75Active
+  simulation75Active,
+  roomFeatureRequests,
+  onApproveFeatureRequest
 }: BedeliaConsoleViewProps) {
   const [selectedDayFilter, setSelectedDayFilter] = useState<string>('all');
   const [selectedStatusFilter, setSelectedStatusFilter] = useState<string>('all');
@@ -73,16 +80,16 @@ export function BedeliaConsoleView({
       <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-6">
         <div>
           <div className="flex items-center gap-2">
-            <span className="bg-purple-100 text-unicaba-purple font-extrabold text-xs uppercase px-2.5 py-0.5 rounded-full border border-purple-200">
-              Consola de Bedelía & Coordinación
+            <span className="bg-brand-blue/10 text-brand-blue font-black text-xs uppercase px-2.5 py-0.5 rounded-full border border-brand-blue/20">
+              Consola de Bedelía & Asignación
             </span>
-            <span className="text-xs text-slate-500">· HU5, HU6, HU7 (Aprobación y Trazabilidad)</span>
+            <span className="text-xs text-slate-500">· Motor Determinístico & Aprobación Humana</span>
           </div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight mt-1">
+          <h1 className="text-2xl font-black text-brand-navy tracking-tight mt-1">
             Asignación Semanal de Aulas · Sede Perón 830
           </h1>
           <p className="text-xs text-slate-500 mt-1">
-            Semana activa: <span className="font-bold text-slate-800">S{currentWeek} ({dateRange})</span> · Algoritmo: Menor aula que alcanza
+            Semana activa: <span className="font-bold text-brand-navy">S{currentWeek} ({dateRange})</span> · Algoritmo: Menor aula que alcanza
           </p>
         </div>
 
@@ -90,10 +97,10 @@ export function BedeliaConsoleView({
         <div className="flex flex-wrap items-center gap-2.5">
           <button
             onClick={onRunEngine}
-            className="flex items-center gap-2 px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all shadow-xs"
+            className="flex items-center gap-2 px-4 py-2 bg-brand-navy hover:bg-[#071930] text-white rounded-xl text-xs font-bold transition-all shadow-xs"
             title="Ejecutar motor determinístico de reglas para optimizar la distribución"
           >
-            <Sparkles className="w-4 h-4 text-purple-300" />
+            <Sparkles className="w-4 h-4 text-brand-cyan" />
             <span>Ejecutar Motor de Reglas</span>
           </button>
 
@@ -121,7 +128,7 @@ export function BedeliaConsoleView({
             <Flame className="w-4 h-4 text-amber-500" />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-black text-slate-900">{occupancyRate}%</span>
+            <span className="text-3xl font-black text-brand-navy">{occupancyRate}%</span>
             <span className="text-[11px] text-slate-500">
               {simulation75Active ? '(Simul. 75%)' : '(Base Inscriptos)'}
             </span>
@@ -129,7 +136,7 @@ export function BedeliaConsoleView({
           <div className="w-full bg-slate-100 rounded-full h-1.5 mt-2 overflow-hidden">
             <div
               className={`h-full rounded-full ${
-                occupancyRate >= 70 ? 'bg-emerald-500' : occupancyRate >= 50 ? 'bg-amber-500' : 'bg-blue-500'
+                occupancyRate >= 70 ? 'bg-emerald-500' : occupancyRate >= 50 ? 'bg-amber-500' : 'bg-brand-blue'
               }`}
               style={{ width: `${Math.min(occupancyRate, 100)}%` }}
             />
@@ -140,10 +147,10 @@ export function BedeliaConsoleView({
         <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
           <div className="flex items-center justify-between text-slate-500 text-xs font-semibold">
             <span>Comisiones Presenciales</span>
-            <Users className="w-4 h-4 text-blue-500" />
+            <Users className="w-4 h-4 text-brand-blue" />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-black text-slate-900">{totalPresential}</span>
+            <span className="text-3xl font-black text-brand-navy">{totalPresential}</span>
             <span className="text-[11px] text-emerald-600 font-bold">{totalAssigned} con aula</span>
           </div>
           <p className="text-[11px] text-slate-400 mt-2">En 27 espacios de 6 niveles</p>
@@ -158,7 +165,7 @@ export function BedeliaConsoleView({
             <AlertTriangle className={`w-4 h-4 ${totalConflicts > 0 ? 'text-red-500' : 'text-slate-400'}`} />
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className={`text-3xl font-black ${totalConflicts > 0 ? 'text-red-600' : 'text-slate-900'}`}>
+            <span className={`text-3xl font-black ${totalConflicts > 0 ? 'text-red-600' : 'text-brand-navy'}`}>
               {totalConflicts}
             </span>
             <span className="text-[11px] text-slate-500">sin aula compatible</span>
@@ -182,7 +189,66 @@ export function BedeliaConsoleView({
         </div>
       </div>
 
-      {/* Alertas Destacadas si existen */}
+      {/* Solicitudes de Características Especiales de Docentes (Req 6) */}
+      {roomFeatureRequests.length > 0 && (
+        <div className="bg-white p-5 rounded-2xl border-2 border-brand-blue/30 shadow-xs">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <SlidersHorizontal className="w-4 h-4 text-brand-blue" />
+              <h3 className="font-black text-xs text-brand-navy uppercase tracking-wider">
+                Pedidos de Aulas con Características Especiales de Docentes ({roomFeatureRequests.length})
+              </h3>
+            </div>
+            <span className="text-[11px] text-slate-500 font-medium">Requisitos técnicos y pedagógicos</span>
+          </div>
+
+          <div className="space-y-2">
+            {roomFeatureRequests.map((req) => (
+              <div key={req.id} className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-extrabold text-brand-navy">{req.courseName}</span>
+                    <span className="text-slate-500">· {req.professorName}</span>
+                    <span className="bg-blue-100 text-brand-blue px-2 py-0.2 rounded font-bold text-[10px]">
+                      Min: {req.minCapacity} personas
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {req.requiredFeatures.map((f, i) => (
+                      <span key={i} className="bg-white text-slate-700 px-1.5 py-0.2 rounded border border-slate-200 text-[10px] font-medium">
+                        ✓ {f}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
+                  {req.status === 'asignada' ? (
+                    <span className="text-emerald-700 font-bold bg-emerald-100 px-2.5 py-1 rounded-lg text-xs flex items-center gap-1">
+                      <CheckCircle className="w-3.5 h-3.5" />
+                      Asignada a {req.assignedSpaceId ? `Aula ${req.assignedSpaceId}` : 'Espacio adecuado'}
+                    </span>
+                  ) : (
+                    <div className="flex items-center gap-1.5">
+                      <select
+                        onChange={(e) => onApproveFeatureRequest(req.id, e.target.value)}
+                        className="text-xs p-1.5 bg-white border border-brand-blue rounded-lg font-bold text-brand-navy focus:outline-none"
+                      >
+                        <option value="">Asignar Aula...</option>
+                        {SPACES.filter(s => s.capacity >= req.minCapacity).map(s => (
+                          <option key={s.id} value={s.id}>{s.name} ({s.capacity} lug)</option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Alertas Destacadas */}
       {totalConflicts > 0 && (
         <div className="bg-red-50 border border-red-200 p-4 rounded-2xl flex items-start gap-3">
           <AlertTriangle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
@@ -204,7 +270,7 @@ export function BedeliaConsoleView({
           <button
             onClick={() => setSelectedDayFilter('all')}
             className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-              selectedDayFilter === 'all' ? 'bg-slate-900 text-white' : 'text-slate-600 hover:bg-slate-100'
+              selectedDayFilter === 'all' ? 'bg-brand-navy text-white' : 'text-slate-600 hover:bg-slate-100'
             }`}
           >
             Todos los días
@@ -214,7 +280,7 @@ export function BedeliaConsoleView({
               key={d}
               onClick={() => setSelectedDayFilter(d)}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                selectedDayFilter === d ? 'bg-slate-900 text-white' : 'text-slate-600 hover:bg-slate-100'
+                selectedDayFilter === d ? 'bg-brand-navy text-white' : 'text-slate-600 hover:bg-slate-100'
               }`}
             >
               {d}
@@ -317,7 +383,7 @@ export function BedeliaConsoleView({
                               onReassignSpace(alloc.id, e.target.value);
                               setReassigningAllocId(null);
                             }}
-                            className="text-xs p-1 rounded border border-purple-400 bg-white font-bold"
+                            className="text-xs p-1 rounded border border-brand-blue bg-white font-bold"
                           >
                             <option value="">-- Sin Aula --</option>
                             {SPACES.map(s => (
@@ -337,7 +403,7 @@ export function BedeliaConsoleView({
                         alloc.modality === 'presencial' ? (
                           primarySpace ? (
                             <div>
-                              <span className="font-black text-slate-900">
+                              <span className="font-black text-brand-navy">
                                 {alloc.assignedSpaceIds.length > 1
                                   ? assignedSpaces.map(s => s?.name).join(' + ')
                                   : primarySpace.name
@@ -368,7 +434,7 @@ export function BedeliaConsoleView({
                       {alloc.modality === 'presencial' && (
                         <button
                           onClick={() => setReassigningAllocId(alloc.id)}
-                          className="px-2.5 py-1 text-slate-600 hover:text-unicaba-purple hover:bg-purple-50 rounded-lg text-xs font-bold transition-colors inline-flex items-center gap-1 border border-slate-200"
+                          className="px-2.5 py-1 text-slate-600 hover:text-brand-blue hover:bg-blue-50 rounded-lg text-xs font-bold transition-colors inline-flex items-center gap-1 border border-slate-200"
                           title="Reasignar aula manualmente con registro de decisión"
                         >
                           <ArrowRightLeft className="w-3 h-3" />

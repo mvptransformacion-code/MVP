@@ -4,7 +4,7 @@ import React from 'react';
 import { Commission, DayOfWeek } from '@/types';
 import { generateHeatmapMatrix } from '@/lib/engine/ruleEngine';
 import { WEEKS_DATA } from '@/lib/data/mockData';
-import { Flame, Info, CheckCircle2, TrendingUp, BarChart3, AlertOctagon } from 'lucide-react';
+import { TrendingUp, BarChart3 } from 'lucide-react';
 
 interface HeatmapViewProps {
   commissions: Commission[];
@@ -24,18 +24,18 @@ export function HeatmapView({ commissions, onSelectWeekAndDay, simulation75Activ
       case 'holiday':
         return 'bg-slate-100 text-slate-400 border-slate-200';
       case 'conflict_large':
-        return 'bg-purple-600 text-white font-extrabold shadow-xs'; // >121 inscriptos
+        return 'bg-[#7c3aed] text-white font-extrabold shadow-2xs'; // >121 inscriptos
       case 'conflict_no_space':
-        return 'bg-rose-600 text-white font-extrabold shadow-xs animate-pulse'; // Sin aula
+        return 'bg-[#e11d48] text-white font-extrabold shadow-2xs animate-pulse'; // Sin aula
       case 'intendencia':
-        return 'bg-amber-600 text-white font-bold'; // Requiere auditorio
+        return 'bg-[#d97706] text-white font-bold'; // Requiere auditorio
       case 'high':
-        return 'bg-amber-400 text-slate-900 font-bold'; // 20-24 aulas
+        return 'bg-[#f59e0b] text-slate-900 font-bold'; // 20-24 aulas
       case 'medium':
-        return 'bg-teal-400 text-slate-900 font-bold'; // 12-19 aulas
+        return 'bg-[#00b4d8] text-slate-900 font-bold'; // 12-19 aulas
       case 'low':
       default:
-        return 'bg-emerald-100 text-emerald-900 font-semibold'; // <12 aulas
+        return 'bg-[#ccfbf1] text-teal-950 font-semibold'; // <12 aulas
     }
   };
 
@@ -45,12 +45,12 @@ export function HeatmapView({ commissions, onSelectWeekAndDay, simulation75Activ
       <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="bg-purple-100 text-unicaba-purple font-extrabold text-xs uppercase px-2.5 py-0.5 rounded-full border border-purple-200">
-              Ilustración 3 del TFI
+            <span className="bg-brand-blue/10 text-brand-blue font-extrabold text-xs uppercase px-2.5 py-0.5 rounded-full border border-brand-blue/20">
+              Visualización Estratégica
             </span>
-            <span className="text-xs text-slate-500">· Matriz Completa del Cuatrimestre (2C 2026)</span>
+            <span className="text-xs text-slate-500">· Matriz Completa del Cuatrimestre</span>
           </div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight mt-1">
+          <h1 className="text-2xl font-black text-brand-navy tracking-tight mt-1">
             Mapa de Calor de Ocupación y Cuellos de Botella
           </h1>
           <p className="text-xs text-slate-500 mt-1">
@@ -60,7 +60,7 @@ export function HeatmapView({ commissions, onSelectWeekAndDay, simulation75Activ
 
         {/* Badge de simulación activa */}
         <div className="bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl text-xs flex items-center gap-2">
-          <TrendingUp className="w-4 h-4 text-unicaba-pink" />
+          <TrendingUp className="w-4 h-4 text-brand-blue" />
           <div>
             <span className="text-slate-500 block">Modo de cálculo:</span>
             <span className="font-bold text-slate-800">
@@ -78,7 +78,7 @@ export function HeatmapView({ commissions, onSelectWeekAndDay, simulation75Activ
               <th className="py-2.5 px-3 text-left text-xs font-bold text-slate-400 w-24">Día / Sem</th>
               {WEEKS_DATA.map((w) => (
                 <th key={w.weekNumber} className="py-2.5 px-1.5 text-center">
-                  <div className="text-xs font-black text-slate-800">{w.label}</div>
+                  <div className="text-xs font-black text-brand-navy">{w.label}</div>
                   <div className="text-[10px] text-slate-400 font-normal whitespace-nowrap">{w.dateRange}</div>
                 </th>
               ))}
@@ -87,7 +87,7 @@ export function HeatmapView({ commissions, onSelectWeekAndDay, simulation75Activ
           <tbody>
             {days.map((day) => (
               <tr key={day} className="border-t border-slate-100">
-                <td className="py-2.5 px-3 font-extrabold text-xs text-slate-700 whitespace-nowrap">
+                <td className="py-2.5 px-3 font-extrabold text-xs text-brand-navy whitespace-nowrap">
                   {day}
                 </td>
                 {WEEKS_DATA.map((w) => {
@@ -99,7 +99,7 @@ export function HeatmapView({ commissions, onSelectWeekAndDay, simulation75Activ
                     <td key={w.weekNumber} className="p-1 text-center">
                       <button
                         onClick={() => onSelectWeekAndDay(w.weekNumber, day)}
-                        className={`w-full h-11 rounded-lg flex flex-col items-center justify-center transition-all hover:scale-105 hover:ring-2 hover:ring-slate-900/30 ${getCellColor(
+                        className={`w-full h-11 rounded-lg flex flex-col items-center justify-center transition-all hover:scale-105 hover:ring-2 hover:ring-brand-navy/30 ${getCellColor(
                           status
                         )}`}
                         title={`Semana ${w.weekNumber} (${day}): ${count} comisiones presenciales. Click para ver detalle.`}
@@ -114,37 +114,37 @@ export function HeatmapView({ commissions, onSelectWeekAndDay, simulation75Activ
           </tbody>
         </table>
 
-        {/* Referencias del Mapa de Calor (Exactas del TFI) */}
+        {/* Referencias del Mapa de Calor */}
         <div className="mt-6 pt-5 border-t border-slate-100 flex flex-wrap items-center gap-4 text-xs text-slate-600">
-          <span className="font-extrabold text-slate-800 text-[11px] uppercase tracking-wider">Referencias:</span>
+          <span className="font-extrabold text-brand-navy text-[11px] uppercase tracking-wider">Referencias:</span>
           
           <div className="flex items-center gap-1.5">
-            <span className="w-3.5 h-3.5 rounded bg-emerald-100 border border-emerald-300 inline-block" />
+            <span className="w-3.5 h-3.5 rounded bg-[#ccfbf1] border border-teal-300 inline-block" />
             <span>Menos de 12 aulas</span>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <span className="w-3.5 h-3.5 rounded bg-teal-400 inline-block" />
+            <span className="w-3.5 h-3.5 rounded bg-[#00b4d8] inline-block" />
             <span>12 a 19 aulas</span>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <span className="w-3.5 h-3.5 rounded bg-amber-400 inline-block" />
+            <span className="w-3.5 h-3.5 rounded bg-[#f59e0b] inline-block" />
             <span>20 a 24 aulas (casi lleno)</span>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <span className="w-3.5 h-3.5 rounded bg-purple-600 inline-block" />
-            <span className="font-medium text-purple-900">Comisiones &gt; 121 inscriptos (superan el aula mayor)</span>
+            <span className="w-3.5 h-3.5 rounded bg-[#7c3aed] inline-block" />
+            <span className="font-medium text-purple-900">Comisiones &gt; 121 inscriptos (superan aula mayor)</span>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <span className="w-3.5 h-3.5 rounded bg-amber-600 inline-block" />
+            <span className="w-3.5 h-3.5 rounded bg-[#d97706] inline-block" />
             <span>Requiere Intendencia</span>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <span className="w-3.5 h-3.5 rounded bg-rose-600 inline-block" />
+            <span className="w-3.5 h-3.5 rounded bg-[#e11d48] inline-block" />
             <span className="font-bold text-rose-800">Quedan sin disponibilidad propia</span>
           </div>
 
@@ -155,12 +155,12 @@ export function HeatmapView({ commissions, onSelectWeekAndDay, simulation75Activ
         </div>
       </div>
 
-      {/* Tabla Comparativa de Indicadores (Tabla 4 y 24 del TFI) */}
+      {/* Tabla Comparativa de Indicadores */}
       <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
         <div className="flex items-center gap-2 mb-4">
-          <BarChart3 className="w-5 h-5 text-unicaba-pink" />
-          <h2 className="text-base font-black text-slate-900">
-            Comparativa de Desempeño: Cartelera Real vs. Motor de Reglas (TFI Tablas 4 y 24)
+          <BarChart3 className="w-5 h-5 text-brand-blue" />
+          <h2 className="text-base font-black text-brand-navy">
+            Comparativa de Desempeño: Cartelera Real vs. Motor de Reglas
           </h2>
         </div>
 
@@ -169,7 +169,7 @@ export function HeatmapView({ commissions, onSelectWeekAndDay, simulation75Activ
             <thead>
               <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase text-[10px]">
                 <th className="py-2.5 px-3">Indicador</th>
-                <th className="py-2.5 px-3 text-center">Asignación Real (Cartelera Noviembre)</th>
+                <th className="py-2.5 px-3 text-center">Asignación Real (Cartelera)</th>
                 <th className="py-2.5 px-3 text-center">Simulación Motor (Base Inscriptos)</th>
                 <th className="py-2.5 px-3 text-center text-emerald-800 bg-emerald-50/50">Simulación con Desgranamiento (75%)</th>
               </tr>

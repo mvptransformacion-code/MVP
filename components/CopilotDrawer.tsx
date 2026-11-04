@@ -13,9 +13,7 @@ import {
   X, 
   Bot, 
   User, 
-  CheckCircle2, 
   BookOpen, 
-  ShieldCheck, 
   ArrowRight,
   Maximize2,
   Minimize2
@@ -41,7 +39,7 @@ export function CopilotDrawer({
       id: 'welcome',
       sender: 'copilot',
       timestamp: 'Ahora',
-      text: '¡Hola! Soy el **Copiloto de Decisión sobre Espacios** (Fase II · GenAI). Consulto mediante funciones seguras de solo lectura los datos de asignación, el motor de reglas y la asistencia histórica para explicarte alternativas y escenarios sin inventar datos. ¿En qué te puedo ayudar?',
+      text: '¡Hola! Soy el **Copiloto de Decisión sobre Espacios** (Fase II · GenAI). Consulto mediante funciones de solo lectura los datos de asignación, el motor de reglas y la asistencia histórica para explicarte alternativas y escenarios sin inventar datos. ¿En qué te puedo ayudar?',
       sourceCitations: ['Motor de Reglas Determinístico (Fase I)', 'Catálogo de 27 Espacios Sede Perón 830']
     }
   ]);
@@ -80,34 +78,34 @@ export function CopilotDrawer({
     <div className={`fixed right-0 top-0 bottom-0 z-50 bg-white border-l border-slate-200 shadow-2xl flex flex-col transition-all duration-300 ${
       isExpanded ? 'w-full md:w-[650px]' : 'w-full md:w-[480px]'
     }`}>
-      {/* Header del Copiloto */}
-      <div className="bg-gradient-to-r from-purple-900 via-indigo-900 to-slate-900 text-white p-4 flex items-center justify-between">
+      {/* Header del Copiloto en Azul Marino y Cyan */}
+      <div className="bg-gradient-to-r from-brand-navy via-[#004e82] to-[#0077c8] text-white p-4 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center">
-            <Sparkles className="w-5 h-5 text-purple-300" />
+          <div className="w-9 h-9 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center">
+            <Sparkles className="w-5 h-5 text-brand-cyan" />
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <h2 className="font-extrabold text-sm tracking-tight">Copiloto de Espacios</h2>
-              <span className="text-[10px] bg-purple-500/30 text-purple-200 px-1.5 py-0.2 rounded font-bold">
+              <h2 className="font-extrabold text-sm tracking-tight text-white">Copiloto de Espacios</h2>
+              <span className="text-[10px] bg-white/20 text-brand-cyan px-1.5 py-0.2 rounded font-bold">
                 GenAI · MIT 4-Stage
               </span>
             </div>
-            <p className="text-[11px] text-purple-200">Explicaciones fundamentadas · Sede Perón 830</p>
+            <p className="text-[11px] text-white/80">Explicaciones fundamentadas · Sede Perón 830</p>
           </div>
         </div>
 
         <div className="flex items-center gap-1">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="p-1.5 text-purple-300 hover:text-white rounded-lg hover:bg-white/10"
+            className="p-1.5 text-white/70 hover:text-white rounded-lg hover:bg-white/10"
             title={isExpanded ? 'Reducir' : 'Expandir'}
           >
             {isExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
           </button>
           <button
             onClick={onClose}
-            className="p-1.5 text-purple-300 hover:text-white rounded-lg hover:bg-white/10"
+            className="p-1.5 text-white/70 hover:text-white rounded-lg hover:bg-white/10"
             title="Cerrar Copiloto"
           >
             <X className="w-5 h-5" />
@@ -122,7 +120,7 @@ export function CopilotDrawer({
           <button
             key={i}
             onClick={() => handleSend(prompt)}
-            className="px-2.5 py-1 bg-white hover:bg-purple-50 text-slate-700 hover:text-purple-900 text-[11px] font-semibold rounded-lg border border-slate-200 shadow-2xs whitespace-nowrap transition-colors"
+            className="px-2.5 py-1 bg-white hover:bg-brand-blue/10 text-slate-700 hover:text-brand-blue text-[11px] font-semibold rounded-lg border border-slate-200 shadow-2xs whitespace-nowrap transition-colors"
           >
             {prompt}
           </button>
@@ -140,14 +138,14 @@ export function CopilotDrawer({
               className={`flex gap-2.5 ${isUser ? 'justify-end' : 'justify-start'}`}
             >
               {!isUser && (
-                <div className="w-7 h-7 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center shrink-0 mt-0.5">
+                <div className="w-7 h-7 rounded-lg bg-brand-light text-brand-blue flex items-center justify-center shrink-0 mt-0.5 border border-brand-blue/20">
                   <Bot className="w-4 h-4" />
                 </div>
               )}
 
               <div className={`max-w-[85%] rounded-2xl p-3.5 shadow-2xs ${
                 isUser
-                  ? 'bg-purple-600 text-white rounded-br-none'
+                  ? 'bg-brand-blue text-white rounded-br-none'
                   : 'bg-slate-100/90 text-slate-900 rounded-tl-none border border-slate-200/80'
               }`}>
                 {/* Texto formateado */}
@@ -162,7 +160,7 @@ export function CopilotDrawer({
                 {msg.sourceCitations && msg.sourceCitations.length > 0 && (
                   <div className="mt-3 pt-2.5 border-t border-slate-200/80">
                     <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1 flex items-center gap-1">
-                      <BookOpen className="w-3 h-3 text-purple-500" />
+                      <BookOpen className="w-3 h-3 text-brand-blue" />
                       Fuentes verificadas del motor:
                     </span>
                     <ul className="list-disc list-inside space-y-0.5 text-[11px] text-slate-600">
@@ -178,7 +176,7 @@ export function CopilotDrawer({
                   <div className="mt-3 pt-2">
                     <button
                       onClick={() => onApplyAction(msg.suggestedAction!)}
-                      className="w-full flex items-center justify-center gap-2 py-2 px-3 bg-gradient-to-r from-purple-700 to-indigo-700 hover:from-purple-800 hover:to-indigo-800 text-white font-bold rounded-xl shadow-xs transition-all text-xs"
+                      className="w-full flex items-center justify-center gap-2 py-2 px-3 bg-gradient-to-r from-brand-blue to-brand-navy hover:from-[#006cb8] hover:to-[#081b33] text-white font-bold rounded-xl shadow-xs transition-all text-xs"
                     >
                       <span>{msg.suggestedAction.label}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -192,7 +190,7 @@ export function CopilotDrawer({
               </div>
 
               {isUser && (
-                <div className="w-7 h-7 rounded-lg bg-slate-900 text-white flex items-center justify-center shrink-0 mt-0.5">
+                <div className="w-7 h-7 rounded-lg bg-brand-navy text-white flex items-center justify-center shrink-0 mt-0.5">
                   <User className="w-4 h-4" />
                 </div>
               )}
@@ -216,12 +214,12 @@ export function CopilotDrawer({
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Pregúntale al Copiloto sobre aulas, ocupación o conflictos..."
-            className="flex-1 px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-500 bg-slate-50"
+            className="flex-1 px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue bg-slate-50"
           />
           <button
             type="submit"
             disabled={!inputValue.trim()}
-            className="p-2.5 bg-purple-600 hover:bg-purple-700 disabled:opacity-40 text-white rounded-xl shadow-xs transition-all"
+            className="p-2.5 bg-brand-blue hover:bg-[#006cb8] disabled:opacity-40 text-white rounded-xl shadow-xs transition-all"
           >
             <Send className="w-4 h-4" />
           </button>

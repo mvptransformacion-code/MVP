@@ -94,6 +94,22 @@ export interface ChangeRequest {
   createdAt: string;
 }
 
+// Nueva solicitud de aula con características específicas (Req 6 del usuario)
+export interface RoomFeatureRequest {
+  id: string;
+  professorName: string;
+  courseName: string;
+  commissionId: string;
+  weekNumber: number;
+  dayOfWeek: DayOfWeek;
+  minCapacity: number;
+  requiredFeatures: string[]; // ['wifi', 'pizarron', 'proyector', 'audio', 'laboratorio', 'accesibilidad', 'aire_acondicionado']
+  pedagogicalReason: string;
+  status: 'pendiente' | 'asignada' | 'rechazada';
+  assignedSpaceId?: string;
+  createdAt: string;
+}
+
 export interface HeatmapCellData {
   day: DayOfWeek;
   week: number;
@@ -105,3 +121,13 @@ export interface HeatmapCellData {
 }
 
 export type UserRole = 'bedelia' | 'docente' | 'estudiante';
+
+export interface FictionalUser {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  roleLabel: string;
+  title: string;
+  avatarColor: string;
+}

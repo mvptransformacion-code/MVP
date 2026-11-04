@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { Space, SpaceType } from '@/types';
 import { SPACES, TOTAL_OWN_CAPACITY, TOTAL_BUILDING_CAPACITY } from '@/lib/data/spaces';
-import { Building2, Search, Filter, Layers, Users, Monitor, Sparkles, Check } from 'lucide-react';
+import { Building2, Search, Users } from 'lucide-react';
 
 export function SpacesCatalogView() {
   const [selectedFloor, setSelectedFloor] = useState<string>('all');
@@ -33,12 +33,12 @@ export function SpacesCatalogView() {
       <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="bg-purple-100 text-unicaba-purple font-extrabold text-xs uppercase px-2.5 py-0.5 rounded-full border border-purple-200">
-              Datos Maestros (HU1)
+            <span className="bg-brand-blue/10 text-brand-blue font-extrabold text-xs uppercase px-2.5 py-0.5 rounded-full border border-brand-blue/20">
+              Datos Maestros
             </span>
             <span className="text-xs text-slate-500">· Infraestructura Digital</span>
           </div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight mt-1">
+          <h1 className="text-2xl font-black text-brand-navy tracking-tight mt-1">
             Catálogo de Espacios Físicos · Sede Perón 830
           </h1>
           <p className="text-xs text-slate-500 mt-1">
@@ -50,7 +50,7 @@ export function SpacesCatalogView() {
         <div className="flex items-center gap-3">
           <div className="bg-slate-50 border border-slate-200 p-3 rounded-xl text-center">
             <span className="text-xs text-slate-500 block">Aulas Propias (24)</span>
-            <span className="text-xl font-black text-slate-900">{TOTAL_OWN_CAPACITY}</span>
+            <span className="text-xl font-black text-brand-navy">{TOTAL_OWN_CAPACITY}</span>
             <span className="text-[10px] text-slate-400 block">lugares</span>
           </div>
           <div className="bg-amber-50/70 border border-amber-200 p-3 rounded-xl text-center">
@@ -71,7 +71,7 @@ export function SpacesCatalogView() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Buscar aula o código..."
-            className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-unicaba-purple"
+            className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue"
           />
         </div>
 
@@ -121,7 +121,7 @@ export function SpacesCatalogView() {
               className={`p-5 rounded-2xl border transition-all duration-200 shadow-xs hover:shadow-md flex flex-col justify-between ${
                 isIntendencia
                   ? 'bg-gradient-to-b from-amber-50/50 to-white border-amber-200 hover:border-amber-400'
-                  : 'bg-white border-slate-200 hover:border-purple-300'
+                  : 'bg-white border-slate-200 hover:border-brand-blue/50'
               }`}
             >
               <div>
@@ -133,14 +133,14 @@ export function SpacesCatalogView() {
                   <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                     isIntendencia
                       ? 'bg-amber-100 text-amber-800 border border-amber-300'
-                      : 'bg-purple-100 text-purple-800'
+                      : 'bg-brand-blue/10 text-brand-blue'
                   }`}>
                     {space.department}
                   </span>
                 </div>
 
                 {/* Nombre y Tipo */}
-                <h3 className="font-bold text-base text-slate-900">{space.name}</h3>
+                <h3 className="font-bold text-base text-brand-navy">{space.name}</h3>
                 <div className="text-xs text-slate-500 flex items-center gap-1.5 mt-0.5">
                   <span className="font-medium">{space.type}</span> · 
                   <span className="font-semibold text-slate-700">Piso {space.floor}</span>
@@ -162,7 +162,7 @@ export function SpacesCatalogView() {
                   <Users className="w-3.5 h-3.5 text-slate-400" />
                   Capacidad Real:
                 </span>
-                <span className="text-base font-black text-slate-900">
+                <span className="text-base font-black text-brand-navy">
                   {space.capacity} <span className="text-xs font-normal text-slate-400">lugares</span>
                 </span>
               </div>

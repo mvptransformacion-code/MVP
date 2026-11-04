@@ -11,14 +11,15 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        unicaba: {
-          pink: "#9b114d",
-          purple: "#581c87",
-          dark: "#1e1b4b",
-          blue: "#1d4ed8",
-          teal: "#0d9488",
-          amber: "#d97706",
-          red: "#dc2626"
+        brand: {
+          blue: "#0077c8",
+          sky: "#0ea5e9",
+          cyan: "#00b4d8",
+          navy: "#0a2240",
+          dark: "#061527",
+          magenta: "#e60067",
+          pink: "#f43f5e",
+          light: "#f0f7fc",
         }
       },
     },
