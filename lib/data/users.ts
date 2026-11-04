@@ -38,3 +38,4 @@ export const FICTIONAL_USERS: FictionalUser[] = [
     avatarColor: 'from-brand-cyan to-emerald-600'
   }
 ];
+

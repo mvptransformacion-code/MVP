@@ -331,6 +331,7 @@ export default function HomePage() {
             simulation75Active={simulation75Active}
             roomFeatureRequests={roomFeatureRequests}
             onApproveFeatureRequest={handleApproveFeatureRequest}
+            onOpenCopilot={() => setIsCopilotOpen(true)}
           />
         )}
 

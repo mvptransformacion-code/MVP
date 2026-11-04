@@ -221,3 +221,4 @@ export function LoginView({ onLogin, onViewPublicCartelera }: LoginViewProps) {
     </div>
   );
 }
+

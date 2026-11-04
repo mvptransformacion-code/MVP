@@ -67,3 +67,4 @@ export function Logo({ className = '', size = 'md', showSubtitle = true }: LogoP
     </div>
   );
 }
+
